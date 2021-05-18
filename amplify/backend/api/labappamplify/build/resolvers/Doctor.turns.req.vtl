@@ -1,0 +1,106 @@
+#if( $util.isNull($ctx.source.id) )
+  #set( $result = {
+  "items":   []
+} )
+  #return($result)
+#else
+  #set( $limit = $util.defaultIfNull($context.args.limit, 100) )
+  #set( $query = {
+  "expression": "#partitionKey = :partitionKey",
+  "expressionNames": {
+      "#partitionKey": "doctorId"
+  },
+  "expressionValues": {
+      ":partitionKey": {
+          "S": "$context.source.id"
+    }
+  }
+} )
+  ## [Start] Applying Key Condition **
+  #set( $sortKeyValue = "" )
+  #set( $sortKeyValue2 = "" )
+  #if( !$util.isNull($ctx.args.dateType) && !$util.isNull($ctx.args.dateType.beginsWith) )
+#if( !$util.isNull($ctx.args.dateType.beginsWith.date) ) #set( $sortKeyValue = "$ctx.args.dateType.beginsWith.date" ) #end
+#if( !$util.isNull($ctx.args.dateType.beginsWith.type) ) #set( $sortKeyValue = "$sortKeyValue#$ctx.args.dateType.beginsWith.type" ) #end
+    #set( $query.expression = "$query.expression AND begins_with(#sortKey, :sortKey)" )
+    $util.qr($query.expressionNames.put("#sortKey", "date#type"))
+    $util.qr($query.expressionValues.put(":sortKey", { "S": "$sortKeyValue" }))
+  #end
+  #if( !$util.isNull($ctx.args.dateType) && !$util.isNull($ctx.args.dateType.between) )
+    #if( $ctx.args.dateType.between.size() != 2 )
+      $util.error("Argument dateType.between expects exactly 2 elements.")
+    #end
+#if( !$util.isNull($ctx.args.dateType.between[0].date) ) #set( $sortKeyValue = "$ctx.args.dateType.between[0].date" ) #end
+#if( !$util.isNull($ctx.args.dateType.between[0].type) ) #set( $sortKeyValue = "$sortKeyValue#$ctx.args.dateType.between[0].type" ) #end
+#if( !$util.isNull($ctx.args.dateType.between[1].date) ) #set( $sortKeyValue2 = "$ctx.args.dateType.between[1].date" ) #end
+#if( !$util.isNull($ctx.args.dateType.between[1].type) ) #set( $sortKeyValue2 = "$sortKeyValue2#$ctx.args.dateType.between[1].type" ) #end
+    #set( $query.expression = "$query.expression AND #sortKey BETWEEN :sortKey0 AND :sortKey1" )
+    $util.qr($query.expressionNames.put("#sortKey", "date#type"))
+    $util.qr($query.expressionValues.put(":sortKey0", { "S": "$sortKeyValue" }))
+    $util.qr($query.expressionValues.put(":sortKey1", { "S": "$sortKeyValue2" }))
+  #end
+  #if( !$util.isNull($ctx.args.dateType) && !$util.isNull($ctx.args.dateType.eq) )
+#if( !$util.isNull($ctx.args.dateType.eq.date) ) #set( $sortKeyValue = "$ctx.args.dateType.eq.date" ) #end
+#if( !$util.isNull($ctx.args.dateType.eq.type) ) #set( $sortKeyValue = "$sortKeyValue#$ctx.args.dateType.eq.type" ) #end
+    #set( $query.expression = "$query.expression AND #sortKey = :sortKey" )
+    $util.qr($query.expressionNames.put("#sortKey", "date#type"))
+    $util.qr($query.expressionValues.put(":sortKey", { "S": "$sortKeyValue" }))
+  #end
+  #if( !$util.isNull($ctx.args.dateType) && !$util.isNull($ctx.args.dateType.lt) )
+#if( !$util.isNull($ctx.args.dateType.lt.date) ) #set( $sortKeyValue = "$ctx.args.dateType.lt.date" ) #end
+#if( !$util.isNull($ctx.args.dateType.lt.type) ) #set( $sortKeyValue = "$sortKeyValue#$ctx.args.dateType.lt.type" ) #end
+    #set( $query.expression = "$query.expression AND #sortKey < :sortKey" )
+    $util.qr($query.expressionNames.put("#sortKey", "date#type"))
+    $util.qr($query.expressionValues.put(":sortKey", { "S": "$sortKeyValue" }))
+  #end
+  #if( !$util.isNull($ctx.args.dateType) && !$util.isNull($ctx.args.dateType.le) )
+#if( !$util.isNull($ctx.args.dateType.le.date) ) #set( $sortKeyValue = "$ctx.args.dateType.le.date" ) #end
+#if( !$util.isNull($ctx.args.dateType.le.type) ) #set( $sortKeyValue = "$sortKeyValue#$ctx.args.dateType.le.type" ) #end
+    #set( $query.expression = "$query.expression AND #sortKey <= :sortKey" )
+    $util.qr($query.expressionNames.put("#sortKey", "date#type"))
+    $util.qr($query.expressionValues.put(":sortKey", { "S": "$sortKeyValue" }))
+  #end
+  #if( !$util.isNull($ctx.args.dateType) && !$util.isNull($ctx.args.dateType.gt) )
+#if( !$util.isNull($ctx.args.dateType.gt.date) ) #set( $sortKeyValue = "$ctx.args.dateType.gt.date" ) #end
+#if( !$util.isNull($ctx.args.dateType.gt.type) ) #set( $sortKeyValue = "$sortKeyValue#$ctx.args.dateType.gt.type" ) #end
+    #set( $query.expression = "$query.expression AND #sortKey > :sortKey" )
+    $util.qr($query.expressionNames.put("#sortKey", "date#type"))
+    $util.qr($query.expressionValues.put(":sortKey", { "S": "$sortKeyValue" }))
+  #end
+  #if( !$util.isNull($ctx.args.dateType) && !$util.isNull($ctx.args.dateType.ge) )
+#if( !$util.isNull($ctx.args.dateType.ge.date) ) #set( $sortKeyValue = "$ctx.args.dateType.ge.date" ) #end
+#if( !$util.isNull($ctx.args.dateType.ge.type) ) #set( $sortKeyValue = "$sortKeyValue#$ctx.args.dateType.ge.type" ) #end
+    #set( $query.expression = "$query.expression AND #sortKey >= :sortKey" )
+    $util.qr($query.expressionNames.put("#sortKey", "date#type"))
+    $util.qr($query.expressionValues.put(":sortKey", { "S": "$sortKeyValue" }))
+  #end
+
+
+  ## [End] Applying Key Condition **
+{
+      "version": "2018-05-29",
+      "operation": "Query",
+      "query":     $util.toJson($query),
+      "scanIndexForward":     #if( $context.args.sortDirection )
+      #if( $context.args.sortDirection == "ASC" )
+true
+      #else
+false
+      #end
+    #else
+true
+    #end,
+      "filter":     #if( $context.args.filter )
+$util.transform.toDynamoDBFilterExpression($ctx.args.filter)
+    #else
+null
+    #end,
+      "limit": $limit,
+      "nextToken":     #if( $context.args.nextToken )
+$util.toJson($context.args.nextToken)
+    #else
+null
+    #end,
+      "index": "byDoctor"
+  }
+#end
