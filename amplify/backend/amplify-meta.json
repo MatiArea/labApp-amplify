@@ -1,0 +1,42 @@
+{
+  "providers": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-labappamplify-dev-170516-authRole",
+      "UnauthRoleArn": "arn:aws:iam::822651364052:role/amplify-labappamplify-dev-170516-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::822651364052:role/amplify-labappamplify-dev-170516-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-labappamplify-dev-170516-deployment",
+      "UnauthRoleName": "amplify-labappamplify-dev-170516-unauthRole",
+      "StackName": "amplify-labappamplify-dev-170516",
+      "StackId": "arn:aws:cloudformation:us-east-1:822651364052:stack/amplify-labappamplify-dev-170516/5eaa5510-b814-11eb-b0c0-0e1e5ddf8d93",
+      "AmplifyAppId": "d3m1sy3ulslgq7"
+    }
+  },
+  "api": {
+    "labappamplify": {
+      "service": "AppSync",
+      "providerPlugin": "awscloudformation",
+      "output": {
+        "authConfig": {
+          "defaultAuthentication": {
+            "authenticationType": "API_KEY",
+            "apiKeyConfig": {
+              "apiKeyExpirationDays": 7,
+              "description": "Api key for labApp TechAcademy"
+            }
+          },
+          "additionalAuthenticationProviders": []
+        },
+        "GraphQLAPIIdOutput": "vpfkqlshzvcv7po4xkfgj3iita",
+        "GraphQLAPIEndpointOutput": "https://67fhdci6ujbdjijgmblupvudwa.appsync-api.us-east-1.amazonaws.com/graphql",
+        "GraphQLAPIKeyOutput": "da2-ti6argazfzcf3ccehjqnqcadeq"
+      },
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-labappamplify-dev-170516-deployment/amplify-cfn-templates/api/cloudformation-template.json",
+        "logicalId": "apilabappamplify"
+      },
+      "lastPushTimeStamp": "2021-05-18T20:15:36.103Z",
+      "lastPushDirHash": "2xVKCbYmKgxZblAaiCND/dSvUaI="
+    }
+  }
+}

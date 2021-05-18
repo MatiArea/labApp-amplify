@@ -1,0 +1,22 @@
+type Patient @model {
+  id: ID!
+  name: String!
+  dni: Int!
+}
+
+type Doctor @model {
+  id: ID!
+  name: String!
+  specialty: String!
+  turns: [Turn] @connection(keyName: "byDoctor", fields: ["id"])
+}
+
+type Turn @model @key(name: "byDoctor", fields: ["doctorId", "date", "type"]) {
+  id: ID!
+  patiendId: ID!
+  doctorId: ID!
+  patient: Patient @connection(fields: ["patiendId"])
+  doctor: Doctor @connection(fields: ["doctorId"])
+  date: String!
+  type: String!
+}
