@@ -1,0 +1,202 @@
+# this is an auto generated file. This will be overwritten
+mutation CreatePatient(
+  $input: CreatePatientInput!
+  $condition: ModelPatientConditionInput
+) {
+  createPatient(input: $input, condition: $condition) {
+    id
+    name
+    dni
+    createdAt
+    updatedAt
+  }
+}
+mutation UpdatePatient(
+  $input: UpdatePatientInput!
+  $condition: ModelPatientConditionInput
+) {
+  updatePatient(input: $input, condition: $condition) {
+    id
+    name
+    dni
+    createdAt
+    updatedAt
+  }
+}
+mutation DeletePatient(
+  $input: DeletePatientInput!
+  $condition: ModelPatientConditionInput
+) {
+  deletePatient(input: $input, condition: $condition) {
+    id
+    name
+    dni
+    createdAt
+    updatedAt
+  }
+}
+mutation CreateDoctor(
+  $input: CreateDoctorInput!
+  $condition: ModelDoctorConditionInput
+) {
+  createDoctor(input: $input, condition: $condition) {
+    id
+    name
+    specialty
+    turns {
+      items {
+        id
+        patiendId
+        doctorId
+        date
+        type
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    createdAt
+    updatedAt
+  }
+}
+mutation UpdateDoctor(
+  $input: UpdateDoctorInput!
+  $condition: ModelDoctorConditionInput
+) {
+  updateDoctor(input: $input, condition: $condition) {
+    id
+    name
+    specialty
+    turns {
+      items {
+        id
+        patiendId
+        doctorId
+        date
+        type
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    createdAt
+    updatedAt
+  }
+}
+mutation DeleteDoctor(
+  $input: DeleteDoctorInput!
+  $condition: ModelDoctorConditionInput
+) {
+  deleteDoctor(input: $input, condition: $condition) {
+    id
+    name
+    specialty
+    turns {
+      items {
+        id
+        patiendId
+        doctorId
+        date
+        type
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    createdAt
+    updatedAt
+  }
+}
+mutation CreateTurn(
+  $input: CreateTurnInput!
+  $condition: ModelTurnConditionInput
+) {
+  createTurn(input: $input, condition: $condition) {
+    id
+    patiendId
+    doctorId
+    patient {
+      id
+      name
+      dni
+      createdAt
+      updatedAt
+    }
+    doctor {
+      id
+      name
+      specialty
+      turns {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    date
+    type
+    createdAt
+    updatedAt
+  }
+}
+mutation UpdateTurn(
+  $input: UpdateTurnInput!
+  $condition: ModelTurnConditionInput
+) {
+  updateTurn(input: $input, condition: $condition) {
+    id
+    patiendId
+    doctorId
+    patient {
+      id
+      name
+      dni
+      createdAt
+      updatedAt
+    }
+    doctor {
+      id
+      name
+      specialty
+      turns {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    date
+    type
+    createdAt
+    updatedAt
+  }
+}
+mutation DeleteTurn(
+  $input: DeleteTurnInput!
+  $condition: ModelTurnConditionInput
+) {
+  deleteTurn(input: $input, condition: $condition) {
+    id
+    patiendId
+    doctorId
+    patient {
+      id
+      name
+      dni
+      createdAt
+      updatedAt
+    }
+    doctor {
+      id
+      name
+      specialty
+      turns {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    date
+    type
+    createdAt
+    updatedAt
+  }
+}

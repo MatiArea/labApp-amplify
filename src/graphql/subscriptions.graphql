@@ -1,0 +1,175 @@
+# this is an auto generated file. This will be overwritten
+subscription OnCreatePatient {
+  onCreatePatient {
+    id
+    name
+    dni
+    createdAt
+    updatedAt
+  }
+}
+subscription OnUpdatePatient {
+  onUpdatePatient {
+    id
+    name
+    dni
+    createdAt
+    updatedAt
+  }
+}
+subscription OnDeletePatient {
+  onDeletePatient {
+    id
+    name
+    dni
+    createdAt
+    updatedAt
+  }
+}
+subscription OnCreateDoctor {
+  onCreateDoctor {
+    id
+    name
+    specialty
+    turns {
+      items {
+        id
+        patiendId
+        doctorId
+        date
+        type
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    createdAt
+    updatedAt
+  }
+}
+subscription OnUpdateDoctor {
+  onUpdateDoctor {
+    id
+    name
+    specialty
+    turns {
+      items {
+        id
+        patiendId
+        doctorId
+        date
+        type
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    createdAt
+    updatedAt
+  }
+}
+subscription OnDeleteDoctor {
+  onDeleteDoctor {
+    id
+    name
+    specialty
+    turns {
+      items {
+        id
+        patiendId
+        doctorId
+        date
+        type
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    createdAt
+    updatedAt
+  }
+}
+subscription OnCreateTurn {
+  onCreateTurn {
+    id
+    patiendId
+    doctorId
+    patient {
+      id
+      name
+      dni
+      createdAt
+      updatedAt
+    }
+    doctor {
+      id
+      name
+      specialty
+      turns {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    date
+    type
+    createdAt
+    updatedAt
+  }
+}
+subscription OnUpdateTurn {
+  onUpdateTurn {
+    id
+    patiendId
+    doctorId
+    patient {
+      id
+      name
+      dni
+      createdAt
+      updatedAt
+    }
+    doctor {
+      id
+      name
+      specialty
+      turns {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    date
+    type
+    createdAt
+    updatedAt
+  }
+}
+subscription OnDeleteTurn {
+  onDeleteTurn {
+    id
+    patiendId
+    doctorId
+    patient {
+      id
+      name
+      dni
+      createdAt
+      updatedAt
+    }
+    doctor {
+      id
+      name
+      specialty
+      turns {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    date
+    type
+    createdAt
+    updatedAt
+  }
+}

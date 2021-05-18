@@ -1,0 +1,126 @@
+# this is an auto generated file. This will be overwritten
+query GetPatient($id: ID!) {
+  getPatient(id: $id) {
+    id
+    name
+    dni
+    createdAt
+    updatedAt
+  }
+}
+query ListPatients(
+  $filter: ModelPatientFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listPatients(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      name
+      dni
+      createdAt
+      updatedAt
+    }
+    nextToken
+  }
+}
+query GetDoctor($id: ID!) {
+  getDoctor(id: $id) {
+    id
+    name
+    specialty
+    turns {
+      items {
+        id
+        patiendId
+        doctorId
+        date
+        type
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+    createdAt
+    updatedAt
+  }
+}
+query ListDoctors(
+  $filter: ModelDoctorFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listDoctors(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      name
+      specialty
+      turns {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    nextToken
+  }
+}
+query GetTurn($id: ID!) {
+  getTurn(id: $id) {
+    id
+    patiendId
+    doctorId
+    patient {
+      id
+      name
+      dni
+      createdAt
+      updatedAt
+    }
+    doctor {
+      id
+      name
+      specialty
+      turns {
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+    date
+    type
+    createdAt
+    updatedAt
+  }
+}
+query ListTurns(
+  $filter: ModelTurnFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listTurns(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      patiendId
+      doctorId
+      patient {
+        id
+        name
+        dni
+        createdAt
+        updatedAt
+      }
+      doctor {
+        id
+        name
+        specialty
+        createdAt
+        updatedAt
+      }
+      date
+      type
+      createdAt
+      updatedAt
+    }
+    nextToken
+  }
+}
